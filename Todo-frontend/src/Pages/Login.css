@@ -1,0 +1,173 @@
+Centered Login Page body {
+    font-family: 'Poppins', sans-serif;
+    background: rgb(82, 57, 171);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #2E7D32;
+}
+
+.login-container {
+    width: 300px;
+    padding: 40px;
+    background: rgb(82, 57, 171);
+    border-radius: 10px;
+    border: solid rgb(29, 12, 91);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container:hover {
+    transform: translateY(-3px);
+}
+
+.login-title {
+    font-size: 24px;
+    margin-top: 0px;
+    color: rgb(29, 12, 91);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.login-button {
+    width: 108%;
+    background-color: rgb(29, 12, 91);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    /* background-color: #D84315; */
+    background-color: rgb(107, 192, 90);
+    border: solid rgb(29, 12, 91);
+    padding: 7px 11px;
+
+
+}
+
+.login-button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+.logout-btn {
+    background-color: rgb(29, 12, 91);
+    color: white;
+    padding: 8px 12px;
+    width: 80px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+    background-color: rgb(216, 8, 8);
+    border: solid rgb(29, 12, 91);
+    padding: 7px 11px;
+
+}
+
+/* Loading Spinner */
+.loader-update {
+    height: 40px;
+    margin: 10px auto;
+    border: 4px solid #ddd;
+    border-top: 4px solid #5c67f2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+    margin: 10px auto;
+    border: 4px solid #ddd;
+    border-top: 4px solid #5c67f2;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Full screen split */
+.screen-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Left panel for the form */
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    overflow-y: auto;
+}
+
+/* Right panel for TodoCard */
+.right-panel {
+    flex: 1;
+    text-align: center;
+    padding: 2rem;
+    border: solid rgb(29, 12, 91);
+    border-radius: 10px;
+    background: rgb(82, 57, 171);
+    overflow-y: auto;
+}
+
+.message {
+    margin-top: 10px;
+    color: rgb(29, 12, 91);
+    text-decoration: none;
+}
+
+.message:hover {
+    color: rgb(10, 5, 30);
+}
+
+.status {
+    border-radius: 10px;
+    border: solid rgb(29, 12, 91);
+    padding: 1px;
+}
+
+select {
+    outline: none;
+    /* removes focus ring */
+    text-align: center;
+}

@@ -1,0 +1,180 @@
+/* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: rgb(139, 123, 199);  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #2E7D32;
+}
+
+/* Wrapper */
+.todo-wrapper {
+  width: 400px;
+  background: rgb(82, 57, 171);
+  padding: 20px;
+  border-radius: 12px;
+  border: solid rgb(29, 12, 91);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* App Title */
+.app-title {
+  font-size: 26px;
+  color: rgb(29, 12, 91);
+  margin-top: 0px;
+
+}
+
+/* Form Styling */
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+}
+
+.todo-input {
+  height: 50px;
+}
+
+.todo-input,
+.todo-textarea {
+  width: 60%;
+  padding-top: 12px;
+  border: 2px solid rgb(29, 12, 91);
+  border-radius: 6px;
+  font-size: 16px;
+  text-align: center;
+  background: rgb(206, 193, 255);
+  color: rgb(29, 12, 91);
+  transition: border 0.3s ease-in-out;
+}
+
+.todo-input:focus,
+.todo-textarea:focus {
+  border-color: #2E7D32;
+  outline: none;
+}
+
+.todo-textarea {
+  height: 150px;
+  resize: none;
+}
+
+.todo-form {
+  margin-top: 0px;
+  align-items: center;
+
+}
+
+.todo-button {
+  background-color: rgb(29, 12, 91);
+  color: white;
+  width: 60%;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.todo-button:hover {
+  background-color: #2E7D32;
+  padding:11px;
+  border: solid rgb(29, 12, 91);
+
+}
+
+/* Todo List */
+.todo-container {
+  margin-top: 20px;
+}
+
+.todo-heading {
+  font-size: 30px;
+  color: rgb(29, 12, 91);
+  margin-bottom:30px;
+}
+
+.todo-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Todo Card */
+.todo-card {
+  background: rgb(139, 123, 199);
+  padding: 15px;
+  border-radius: 10px;
+  border: solid rgb(29, 12, 91);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-left: 10px solid rgb(29, 12, 91);
+  transition: transform 0.2s ease-in-out;
+}
+
+.todo-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Todo Title */
+.todo-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(29, 12, 91);
+  margin-bottom: 5px;
+}
+
+/* Todo Description */
+.todo-desc {
+  font-size: 14px;
+  color: rgb(231, 230, 236);
+}
+
+/* Loader */
+.loader {
+  position: absolute;
+  top: 150px;
+  left: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Delete Button */
+.delete-button {
+  background-color: rgb(62, 42, 133);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+  /* background-color: rgb(96, 80, 153); */
+  border: solid rgb(29, 12, 91);
+  padding: 7px 11px;
+}
+
+/* Delete Icon */
+.delete-icon {
+  font-size: 18px;
+}
+
+/* Empty Message */
+.empty-message {
+  margin-top: 30%;
+  color: rgb(29, 12, 91);
+  font-size: 14px;
+  text-align: center;
+}
