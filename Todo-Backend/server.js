@@ -11,11 +11,15 @@ import cookieParser from "cookie-parser";
 const app = express();
 connectDb();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: [
+        "http://localhost:5173",
+        "mern-todo-app-steel.vercel.app"
+    ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"]
 }));
 
 
