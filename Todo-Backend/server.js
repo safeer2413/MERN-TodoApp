@@ -13,19 +13,37 @@ connectDb();
 
 const port = process.env.PORT || 5001;
 
-app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "mern-todo-app-steel.vercel.app"
-    ],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"]
-}));
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://mern-todo-app-steel.vercel.app",
+];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    })
+);
+
+// Handle preflight requests
+app.options("*", cors());
 
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log("Incoming request from:", req.headers.origin);
+    next();
+});
 
 // ✅ Routes
 app.use("/api/users", userRoutes);
