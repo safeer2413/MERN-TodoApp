@@ -10,7 +10,7 @@ userRoutes.post('/login', authUser)
 userRoutes.post('/register', registerUser)
 
 
-userRoutes.get('/logout', userLogoutHandler)
+userRoutes.post('/logout', userLogoutHandler)
 
 
 export default userRoutes

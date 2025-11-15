@@ -36,13 +36,10 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 const authUser = asyncHandler(async (req, res) => {
-
     const { email, password } = req.body;
-
     const user = await Users.findOne({ email })
 
     if (user && (await user.matchPassword(password))) {
-
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
@@ -67,8 +64,11 @@ const authUser = asyncHandler(async (req, res) => {
 const userLogoutHandler = asyncHandler(async (req, res) => {
     res.cookie("jwt", "", {
         httpOnly: true,
+        sameSite: "none",   // required for cross-site cookies (Vercel + Render)
+        secure: true,       // required for HTTPS (Render uses HTTPS)
         expires: new Date(0),
     });
+
 
     res.status(200).json({ message: "Logged out Successfully" });
 })
