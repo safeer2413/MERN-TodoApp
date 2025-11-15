@@ -24,8 +24,9 @@ const userApiSlice = apiSlice.injectEndpoints({
         }),
         userLogout: builder.mutation({
             query: () => ({
-                url: '/api/users/logout',
-                method: 'GET'
+                url: "/api/users/logout",
+                method: "POST",
+                credentials: "include", // ✅
             }),
         })
     })
