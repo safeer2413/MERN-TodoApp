@@ -18,28 +18,28 @@ function Homepage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // 🧾 Local state
+    // Local state
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    // 🧠 API hooks
+    // API hooks
     const [addTodo, { isLoading: addingTodo }] = useAddTodoMutation();
     const [deleteTodo, { isLoading: deletingTodo }] = useDeleteTodoMutation();
     const [userLogout] = useUserLogoutMutation();
 
-    // 🚫 Protect route — redirect if not logged in
+    // Protect route — redirect if not logged in
     useEffect(() => {
         if (!userInfo) navigate("/login");
     }, [userInfo, navigate]);
 
-    // 📦 Fetch todos only if logged in
+    //  Fetch todos only if logged in
     const {
         data: todos,
         refetch,
         isLoading: fetchingTodos,
     } = useGetTodosQuery(
         { userId: userInfo?._id },
-        { skip: !userInfo } // ⛔ prevents unauthorized calls
+        { skip: !userInfo } // prevents unauthorized calls
     );
 
     // ➕ Add Todo
@@ -59,7 +59,7 @@ function Homepage() {
         }
     };
 
-    // ❌ Delete Todo
+    // Delete Todo
     const deleteTodoHandler = async (id) => {
         try {
             await deleteTodo(id).unwrap();
@@ -76,8 +76,6 @@ function Homepage() {
         try {
             await userLogout().unwrap(); // clear cookie (backend)
             dispatch(logout()); // clear redux
-            localStorage.clear();
-            sessionStorage.clear();
             navigate("/login", { replace: true });
             window.location.reload(); // ensures fresh login screen
         } catch (error) {
@@ -90,7 +88,7 @@ function Homepage() {
 
     return (
         <div className="screen-container">
-            {/* 🧭 Left Panel */}
+            {/* Left Panel */}
             <div className="todo-wrapper left-panel">
                 <button onClick={logoutHandler} className="logout-btn">
                     Log Out
@@ -121,7 +119,7 @@ function Homepage() {
                 </form>
             </div>
 
-            {/* 🧭 Right Panel */}
+            {/* Right Panel */}
             <div className="right-panel">
                 {isAnyLoading ? (
                     <div className="loader-container">
