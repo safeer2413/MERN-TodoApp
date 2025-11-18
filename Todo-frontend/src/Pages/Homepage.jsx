@@ -78,6 +78,7 @@ function Homepage() {
             dispatch(logout()); // clear redux
             navigate("/login", { replace: true });
             window.location.reload(); // ensures fresh login screen
+            toast.success("Logout Successfully");
         } catch (error) {
             toast.error("Logout Failed");
             console.error(error);
@@ -122,7 +123,7 @@ function Homepage() {
             {/* Right Panel */}
             <div className="right-panel">
                 {isAnyLoading ? (
-                    <div className="loader-container">
+                    <div className="loader-homepage">
                         <ScaleLoader color="rgb(29, 12, 91)" />
                     </div>
                 ) : (

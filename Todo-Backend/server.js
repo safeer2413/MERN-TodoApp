@@ -23,6 +23,7 @@ app.use(
         origin: allowedOrigins,       //
         credentials: true,            // enables cookies/JWT sharing
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type"],
     })
 );
 

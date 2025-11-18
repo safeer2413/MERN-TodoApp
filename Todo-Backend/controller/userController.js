@@ -47,7 +47,7 @@ const authUser = asyncHandler(async (req, res) => {
             httpOnly: true,
             secure: true,
             sameSite: 'none',
-            maxAge: 30 * 24 * 60 * 60 * 1000
+            maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
         return res.status(201).json({
@@ -68,7 +68,6 @@ const userLogoutHandler = asyncHandler(async (req, res) => {
         secure: true,       // required for HTTPS (Render uses HTTPS)
         expires: new Date(0),
     });
-
 
     res.status(200).json({ message: "Logged out Successfully" });
 })
