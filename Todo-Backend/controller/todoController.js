@@ -2,25 +2,26 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import Todo from "../Model/todoModel.js";
 
 // Create new todo
+// Create new todo
 const createTodoHandler = asyncHandler(async (req, res) => {
 
-    const { title, description, userId } = req.body
+    const { title, description } = req.body
 
-    if (!title || !description || !userId) {
+    if (!title || !description) {
         return res.status(400).json({ message: 'Please provide all fields' });
     };
 
     const todo = await Todo.create({
         title: req.body.title,
         description: req.body.description,
-        userId: req.body.userId,
+        userId: req.user._id,
     })
     return res.status(201).json(todo);
 });
 
 // Get all todos
 const getTodosHandler = asyncHandler(async (req, res) => {
-    const getTodo = await Todo.find({ userId: req.query.userId })
+    const getTodo = await Todo.find({ userId: req.user._id })
 
     return res.json(getTodo);
 });
