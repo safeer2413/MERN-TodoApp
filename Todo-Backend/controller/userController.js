@@ -43,10 +43,12 @@ const authUser = asyncHandler(async (req, res) => {
 
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
+        const isProduction = process.env.NODE_ENV === 'production';
+
         res.cookie('jwt', token, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'none',
+            secure: isProduction ? true : false, // Secure in production (HTTPS), not in dev
+            sameSite: isProduction ? 'none' : 'lax', // None for cross-site (Render/Vercel), Lax for local
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
