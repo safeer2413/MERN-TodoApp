@@ -15,7 +15,8 @@ const port = process.env.PORT || 5001;
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://mern-todo-app-steel.vercel.app",
+    "https://mern-todo-app-steel.vercel.app", // User verified frontend
+    "https://todo-frontend.vercel.app" // Generic backup if needed
 ];
 
 app.use(
