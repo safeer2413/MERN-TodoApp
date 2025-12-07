@@ -11,6 +11,23 @@ const Todoinstance = axios.create({
   },
 });
 
+// ✅ Add Bearer Token to requests
+Todoinstance.interceptors.request.use(
+  (config) => {
+    const userInfo = localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null;
+
+    if (userInfo && userInfo.token) {
+      config.headers.Authorization = `Bearer ${userInfo.token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 Todoinstance.interceptors.response.use(
   (response) => response,
   (error) => {
