@@ -1,4 +1,23 @@
-Centered Login Page body {
+@import "tailwindcss";
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        scale: 0.95;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.2s ease-out;
+}
+
+
+body {
     font-family: 'Poppins', sans-serif;
     background: rgb(82, 57, 171);
     margin: 0;
@@ -7,10 +26,10 @@ Centered Login Page body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    color: #2E7D32;
+    color: #d8e5d9;
 }
 
-.login-container {
+/* .login-container {
     width: 300px;
     padding: 40px;
     background: rgb(82, 57, 171);
@@ -18,33 +37,30 @@ Centered Login Page body {
     border: solid rgb(29, 12, 91);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+;
 }
 
 .login-container:hover {
-    transform: translateY(-3px);
-}
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+} */
 
-.login-title {
-    font-size: 24px;
-    margin-top: 0px;
-    color: rgb(29, 12, 91);
-}
-
-.login-form {
+/* .login-form {
     display: flex;
     flex-direction: column;
-}
+} */
 
-.login-input {
+/* .login-input {
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-}
+} */
 
-.login-button {
+/* .login-button {
     width: 108%;
     background-color: rgb(29, 12, 91);
     color: white;
@@ -54,23 +70,21 @@ Centered Login Page body {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
-}
+} */
 
-.login-button:hover {
-    /* background-color: #D84315; */
+/* .login-button:hover {
+    background-color: #D84315; 
     background-color: rgb(107, 192, 90);
     border: solid rgb(29, 12, 91);
     padding: 7px 11px;
-
-
-}
+} */
 
 .login-button:disabled {
     background-color: #888;
     cursor: not-allowed;
 }
 
-.logout-btn {
+/* .logout-btn {
     background-color: rgb(29, 12, 91);
     color: white;
     padding: 8px 12px;
@@ -80,14 +94,14 @@ Centered Login Page body {
     font-size: 14px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
-}
+} */
 
-.logout-btn:hover {
+/* .logout-btn:hover {
     background-color: rgb(216, 8, 8);
     border: solid rgb(29, 12, 91);
     padding: 7px 11px;
 
-}
+} */
 
 /* Loading Spinner */
 .loader-update {
@@ -157,15 +171,15 @@ Centered Login Page body {
     overflow-y: auto;
 }
 
-.message {
+/* .message {
     margin-top: 10px;
     color: rgb(29, 12, 91);
     text-decoration: none;
-}
+} */
 
-.message:hover {
+/* .message:hover {
     color: rgb(10, 5, 30);
-}
+} */
 
 .status {
     border-radius: 10px;
@@ -177,4 +191,35 @@ select {
     outline: none;
     /* removes focus ring */
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .screen-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: none;
+        width: 100%;
+        overflow-y: visible;
+    }
+
+    .left-panel {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .todo-form {
+        width: 100%;
+        max-width: 400px;
+        /* Prevent it from getting too wide on tablets or large phones */
+    }
+
+    .right-panel {
+        padding: 1rem;
+        height: auto;
+    }
 }

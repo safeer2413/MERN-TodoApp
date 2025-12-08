@@ -5,6 +5,8 @@
 
 ## 🚀 Project Overview  
 
+🔴 **Live Demo**: [Click Here](https://mern-todo-app-steel.vercel.app/)
+
 **MERN Todo App** is a full-stack Todo application built using the **MERN Stack (MongoDB, Express, React, Node.js)**.  
 It includes **user authentication**, **JWT cookies**, and **Redux Toolkit (RTK Query)** for efficient API management.  
 

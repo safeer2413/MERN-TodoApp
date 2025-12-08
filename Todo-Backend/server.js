@@ -11,41 +11,55 @@ import cookieParser from "cookie-parser";
 const app = express();
 connectDb();
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 
+// ADD all possible frontend origins
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://mern-todo-app-steel.vercel.app", // User verified frontend
-    "https://todo-frontend.vercel.app" // Generic backup if needed
+    "http://localhost:5174",       // ← FIX
+    "http://localhost:3000",
+    "https://mern-todo-app-steel.vercel.app",
+    "https://todo-frontend.vercel.app"
 ];
 
+// FIXED CORS setup
 app.use(
     cors({
-        origin: allowedOrigins,       //
-        credentials: true,            // enables cookies/JWT sharing
+        origin: function (origin, callback) {
+            // Allow Postman / mobile apps
+            if (!origin) return callback(null, true);
+
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            } else {
+                console.log("CORS BLOCKED:", origin);
+                return callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true,
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type"],
+        allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
     })
 );
 
-// Handle preflight requests
 app.options("*", cors());
 
-
+// Parsers
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Debug incoming origin
 app.use((req, res, next) => {
     console.log("Incoming request from:", req.headers.origin);
     next();
 });
 
-// ✅ Routes
+// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/todo", todoRoutes);
 
-// ✅ Error handling
+// Error handlers
 app.use(notFound);
 app.use(errorHandler);
 

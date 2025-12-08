@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { useUserLogoutMutation } from "../Slices/userApiSlice";
 import { logout } from "../Slices/authSlice";
 import "./Login.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import Confirmation from "../Component/Confirmation";
 
 function Homepage() {
     const { userInfo } = useSelector((state) => state.auth);
@@ -21,6 +24,7 @@ function Homepage() {
     // Local state
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
     // API hooks
     const [addTodo, { isLoading: addingTodo }] = useAddTodoMutation();
@@ -91,10 +95,16 @@ function Homepage() {
         <div className="screen-container">
             {/* Left Panel */}
             <div className="todo-wrapper left-panel">
-                <button onClick={logoutHandler} className="logout-btn">
-                    Log Out
+                <button onClick={() => setShowConfirmation(true)} className="logout-bt w-8 h-8 rounded-lg hover:bg-red-600 bg-indigo-950 ">
+                    <FontAwesomeIcon icon={faPowerOff} />
                 </button>
 
+                {showConfirmation && (
+                    <Confirmation
+                        onConfirm={logoutHandler}
+                        onCancel={() => setShowConfirmation(false)}
+                    />
+                )}
                 <h1 className="app-title">Todo App</h1>
 
                 <form onSubmit={addTodoHandler} className="todo-form">

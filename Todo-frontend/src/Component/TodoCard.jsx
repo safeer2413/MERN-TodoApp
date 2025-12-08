@@ -42,13 +42,13 @@ function TodoCard({ todos, deleteTodo, isLoading }) {
                 <b>{todo.description}</b>
               </p>
               <button
-                className="delete-button"
+                className="w-8 h-8 rounded-lg hover:bg-red-600 bg-indigo-950 mx-2"
                 onClick={() => navigate(`/${todo._id}`)}
               >
                 <FontAwesomeIcon icon={faPenToSquare} className="delete-icon" />
               </button>
               <button
-                className="delete-button"
+                className="w-8 h-8 rounded-lg hover:bg-red-600 bg-indigo-950"
                 onClick={() => deleteTodo(todo._id)}
               >
                 <FontAwesomeIcon icon={faTrash} className="delete-icon" />
