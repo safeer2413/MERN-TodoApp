@@ -2,7 +2,6 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import Todo from "../Model/todoModel.js";
 
 // Create new todo
-// Create new todo
 const createTodoHandler = asyncHandler(async (req, res) => {
 
     const { title, description } = req.body
@@ -31,22 +30,23 @@ const updateTodoHandler = asyncHandler(async (req, res) => {
     const { title, description, status, id } = req.body;
 
     if (!title) {
-
         return res.status(400).json({ message: 'unknown title' })
     }
     if (!description) {
         return res.status(400).json({ message: 'unknown description' })
     }
 
-    const findTodo = await Todo.findOne({ _id: id })
+    const updatedTodo = await Todo.findByIdAndUpdate(
+        id, 
+        { title, description, status },
+        { new: true } // Return the updated document
+    )
 
-    if (findTodo) {
-        let updateTodo = await Todo.findByIdAndUpdate(
-            findTodo._id, { title, description, status })
-        return res.json(updateTodo)
+    if (updatedTodo) {
+        return res.json(updatedTodo)
     }
     else {
-        return res.status(400).json({ message: 'Todo not found' })
+        return res.status(404).json({ message: 'Todo not found' })
     }
 
 });
@@ -69,11 +69,9 @@ const getTodoHandler = asyncHandler(async (req, res) => {
 
 // Delete todo
 const deleteTodo = asyncHandler(async (req, res) => {
+    const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
 
-
-    const id = await Todo.findByIdAndDelete(req.params.id);
-
-    if (!id) {
+    if (!deletedTodo) {
         return res.status(404).json({ message: 'Todo not found' })
     };
 

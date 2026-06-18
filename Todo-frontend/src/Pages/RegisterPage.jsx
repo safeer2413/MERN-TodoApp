@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Login.css"; // Import the CSS file
 import { useRegisterUserMutation } from "../Slices/userApiSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -44,64 +43,67 @@ function RegisterPage() {
     };
 
     return (
-        <div className="
-    w-75 h-full p-4
-    bg-[#5239AB]
-    rounded-[10px]
-    border-2 border-[#1D0C5B]
-    shadow-[0px_0px_10px_rgba(0,0,0,0.1)]
-    text-center
-    transition
-    duration-200
-    ease-in-out
-    hover:-translate-y-[6px]
-    hover:scale-[1.03]
-    hover:shadow-[0_12px_24px_rgba(0,0,0,0.15)]">
+        <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 p-6">
+            <div className="
+                w-full max-w-[480px] p-10
+                bg-white/95 backdrop-blur-xl
+                rounded-[2.5rem]
+                border border-white/40
+                shadow-[0_40px_100px_rgba(29,12,91,0.3)]
+                text-center
+                animate-fadeIn">
 
-            <h1 className="text-2xl m-2 font-bold text-indigo-950">Register</h1>
+                <h1 className="text-4xl mb-2 font-black text-indigo-950 tracking-tight">Join Us</h1>
+                <p className="text-indigo-900/60 mb-10 font-medium">Create an account to start managing tasks.</p>
 
-            <form onSubmit={userRegisterHandler}>
-                <input
-                    type="text"
-                    placeholder="Enter Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="mt-2 p-2 w-60 outline-none rounded-lg border-2 border-indigo-950"                    required
-                    autoFocus
-                />
-                <input
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 p-2 w-60 outline-none rounded-lg border-2 border-indigo-950"
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Enter Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="mt-2 p-2 w-60 outline-none rounded-lg border-2 border-indigo-950"
-                    required
-                />
+                <form onSubmit={userRegisterHandler} className="space-y-5">
+                    <input
+                        type="text"
+                        placeholder="Full Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="input-premium py-4"
+                        required
+                        autoFocus
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="input-premium py-4"
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="input-premium py-4"
+                        required
+                    />
 
-                <button type="submit" disabled={isLoading} className="mt-2 p-2 w-60 bg-indigo-950 rounded-lg border-2 border-indigo-950 hover:bg-gray-900 disabled:bg-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed" disabled={isLoading} >
-                    {isLoading ? 'Registering...' : 'Register'}
-                </button>
+                    <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="btn-premium w-full py-5 text-lg mt-4 shadow-2xl">
+                        {isLoading ? 'Creating Account...' : 'Sign Up Now'}
+                    </button>
 
-                {isLoading &&
+                    {isLoading && (
+                        <div className="flex justify-center mt-6">
+                            <ScaleLoader color="rgb(79, 70, 229)" height={25} />
+                        </div>
+                    )}
 
-                    <div className="flex justify-center align-cente mt-2">
-                        <ScaleLoader color="rgb(29, 12, 91)" className="mt-2" />
-                    </div>}
-
-                <div className="mt-4 text-indigo-950 border-indigo-950 hover:text-gray-500">
-                    <Link to="/login">
-                        Already have an account? <strong>Login</strong>
-                    </Link>
-                </div>
-            </form>
+                    <div className="mt-10 pt-8 border-t border-indigo-100/60 text-indigo-900/70">
+                        <p className="text-indigo-900/50">Already have an account?</p>
+                        <Link to="/login" className="inline-block mt-2 font-black text-indigo-600 hover:text-indigo-800 transition-all hover:scale-105 active:scale-95">
+                            Sign In to Account
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

@@ -23,10 +23,21 @@ const registerUser = asyncHandler(async (req, res) => {
     });
 
     if (user) {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+        
+        const isProduction = process.env.NODE_ENV === 'production';
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? 'none' : 'lax',
+            maxAge: 30 * 24 * 60 * 60 * 1000
+        });
+
         return res.status(201).json({
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            token: token // Added token to response body
         });
     }
     else {
@@ -47,15 +58,16 @@ const authUser = asyncHandler(async (req, res) => {
 
         res.cookie('jwt', token, {
             httpOnly: true,
-            secure: isProduction ? true : false, // Secure in production (HTTPS), not in dev
+            secure: isProduction, // Secure in production (HTTPS), not in dev
             sameSite: isProduction ? 'none' : 'lax', // None for cross-site (Render/Vercel), Lax for local
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            maxAge: 30 * 24 * 60 * 60 * 1000
         });
 
-        return res.status(201).json({
+        return res.status(200).json({ // Changed status to 200 for successful login
             _id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            token: token // Added token to response body
         })
     }
     else {
@@ -64,10 +76,12 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 const userLogoutHandler = asyncHandler(async (req, res) => {
+    const isProduction = process.env.NODE_ENV === 'production';
+    
     res.cookie("jwt", "", {
         httpOnly: true,
-        sameSite: "none",   // required for cross-site cookies (Vercel + Render)
-        secure: true,       // required for HTTPS (Render uses HTTPS)
+        sameSite: isProduction ? "none" : "lax",   
+        secure: isProduction,       
         expires: new Date(0),
     });
 

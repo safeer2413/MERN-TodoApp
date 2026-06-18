@@ -49,45 +49,52 @@ function UpdateTodo() {
   return (
     <>
       {isLoading ? (
-        <div className="loader-update">
-          <ScaleLoader color="rgb(29, 12, 91)" />
+        <div className="flex justify-center items-center h-screen">
+          <ScaleLoader color="white" />
         </div>
 
       ) : (
-        <div className="todo-wrapper">
-          <h1 className="app-title">Todo List</h1>
-          <form className="todo-form" onSubmit={updateTodoHandler}>
+        <div className="max-w-2xl mx-auto p-8 bg-white/90 backdrop-blur-md rounded-[32px] shadow-2xl border border-white/20 animate-fadeIn mt-10">
+          <h1 className="text-3xl font-black text-indigo-950 mb-8 border-b border-indigo-100 pb-6 tracking-tight">Edit Task</h1>
+          <form className="flex flex-col gap-6" onSubmit={updateTodoHandler}>
             <input
               type="text"
-              placeholder="Enter Title"
+              placeholder="Task Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="todo-input"
+              className="input-premium"
               required
             />
             <textarea
-              placeholder="Enter Description"
+              placeholder="Task Details..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="todo-textarea"
+              className="input-premium min-h-[150px] resize-none"
               required
             ></textarea>
 
-            <select className='status' value={status?.toString()}
-              onChange={(e) => setStatus(e.target.value === "true")}
-              style={{
-                backgroundColor: status === true ? "lightgreen" : "rgb(185, 6, 6)",
-                color: status === true ? "rgb(29, 12, 91)" : "white"
-              }}
+            <div className="flex flex-col gap-2 text-left">
+              <label className="text-sm font-semibold text-indigo-900/60 ml-2">Task Status</label>
+              <select className={`input-premium appearance-none cursor-pointer font-bold ${status ? 'text-green-600 border-green-200 bg-green-50' : 'text-amber-600 border-amber-200 bg-amber-50'}`} 
+                value={status?.toString()}
+                onChange={(e) => setStatus(e.target.value === "true")}
+              >
+                <option value="false">⏳ Still Pending</option>
+                <option value="true">✅ Fully Completed</option>
+              </select>
+            </div>
+
+            <button type="submit" className="btn-premium w-full py-4 mt-4">
+              {isLoading ? 'Syncing...' : 'Save Changes'} 
+            </button>
+            
+            <button 
+                type="button" 
+                onClick={() => navigate("/")} 
+                className="w-full py-2 text-indigo-600 font-semibold hover:text-indigo-800 transition-colors"
             >
-
-              <option className='status-false' value="false">Pending</option>
-              <option className='status-true' value="true">Completed</option>
-
-            </select>
-
-            <button type="submit" className="todo-button">{isLoading ? 'Loading...' : 'Update'} </button>
-
+                Cancel
+            </button>
           </form>
         </div>
 

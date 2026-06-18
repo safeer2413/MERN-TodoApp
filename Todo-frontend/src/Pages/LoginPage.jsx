@@ -51,56 +51,59 @@ function LoginPage() {
     };
 
     return (
-        <div className="
-    w-75 h-full p-4
-    bg-[#5239AB]
-    rounded-[10px]
-    border-2 border-[#1D0C5B]
-    shadow-[0px_0px_10px_rgba(0,0,0,0.1)]
-    text-center
-    transition
-    duration-200
-    ease-in-out
-    hover:-translate-y-[6px]
-    hover:scale-[1.03]
-    hover:shadow-[0_12px_24px_rgba(0,0,0,0.15)]">
+        <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600 p-6">
+            <div className="
+                w-full max-w-[440px] p-10
+                bg-white/95 backdrop-blur-xl
+                rounded-[2.5rem]
+                border border-white/40
+                shadow-[0_40px_100px_rgba(29,12,91,0.3)]
+                text-center
+                animate-fadeIn">
 
-            <h1 className="text-2xl m-2 font-bold text-indigo-950">Login</h1>
+                <h1 className="text-4xl mb-2 font-black text-indigo-950 tracking-tight">Welcome Back</h1>
+                <p className="text-indigo-900/60 mb-10 font-medium">Please enter your details to sign in.</p>
 
-            <form onSubmit={userLoginHandler}>
-                <input
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mt-2 p-2 w-60 outline-none rounded-lg border-2 border-indigo-950"
-                    required
-                />
-                <input
-                    type="password"
-                    value={password}
-                    placeholder="Enter Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="mt-2 p-2 w-60 outline-none rounded-lg border-2 border-indigo-950"
-                    required
-                />
-
-                <button type="submit" disabled={isLoading} className="mt-2 p-2 w-60 bg-indigo-950 rounded-lg border-2 border-indigo-950 hover:bg-gray-900 disabled:bg-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed" >
-                    {isLoading ? "Logging in..." : "Login"}
-                </button>
-
-                {isLoading && (
-                    <div className="flex justify-center align-cente mt-2">
-                        <ScaleLoader color="rgb(29, 12, 91)" className="mt-2"  />
+                <form onSubmit={userLoginHandler} className="space-y-5">
+                    <div className="relative">
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="input-premium py-4"
+                            required
+                        />
                     </div>
-                )}
+                    <div className="relative">
+                        <input
+                            type="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="input-premium py-4"
+                            required
+                        />
+                    </div>
 
-                <div className="mt-4 text-indigo-950 border-indigo-950 hover:text-gray-500">
-                    <Link to="/register">
-                        Don’t have an account? <strong>Register</strong>
-                    </Link>
-                </div>
-            </form>
+                    <button type="submit" disabled={isLoading} className="btn-premium w-full py-5 text-lg mt-4 shadow-2xl" >
+                        {isLoading ? "Validating..." : "Sign In"}
+                    </button>
+
+                    {isLoading && (
+                        <div className="flex justify-center mt-6">
+                            <ScaleLoader color="rgb(79, 70, 229)" height={25} />
+                        </div>
+                    )}
+
+                    <div className="mt-10 pt-8 border-t border-indigo-100/60">
+                        <p className="text-indigo-900/50">Don't have an account?</p>
+                        <Link to="/register" className="inline-block mt-2 font-black text-indigo-600 hover:text-indigo-800 transition-all hover:scale-105 active:scale-95">
+                            Create Free Account
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
