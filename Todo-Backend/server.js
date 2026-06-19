@@ -26,15 +26,21 @@ const allowedOrigins = [
 app.use(
     cors({
         origin: function (origin, callback) {
-            // Allow Postman / mobile apps
+            // Allow Postman / mobile apps / direct requests (no origin)
             if (!origin) return callback(null, true);
 
             if (allowedOrigins.includes(origin)) {
                 return callback(null, true);
-            } else {
-                console.log("CORS BLOCKED:", origin);
-                return callback(new Error("Not allowed by CORS"));
             }
+
+            // Dynamically allow local network IP origins (e.g. http://192.168.1.5:5174)
+            const isLocalIp = /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+)(:\d+)?$/.test(origin);
+            if (isLocalIp) {
+                return callback(null, true);
+            }
+
+            console.log("CORS BLOCKED:", origin);
+            return callback(new Error("Not allowed by CORS"));
         },
         credentials: true,
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
